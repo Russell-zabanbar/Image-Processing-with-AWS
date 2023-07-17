@@ -1,0 +1,105 @@
+{% load  static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>صفحه HTML</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+<body>
+
+
+    <div class="text-center mt-5" style="background-color: #FFFFFF;">
+        <button id="startCamera" class="btn btn-primary btn-lg">درخواست نوبت</button>
+    </div>
+
+<div class="row" style="background-color: #FFFFFF;">
+  <div class="col-md-12">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>شماره نوبت</th>
+            <th>تعداد</th>
+            <th>زمان انتظار</th>
+          </tr>
+        </thead>
+        <tbody id="queueTableBody">
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<video id="cameraStream" autoplay></video>
+<div id="result">نتیجه پردازش</div>
+
+<form id="myForm" method="post" action="/detect/order_list/">
+  {% csrf_token %}
+  <input type="hidden" name="image" id="imageField">
+</form>
+
+<script>
+  // شروع دوربین و گرفتن عکس
+  function startCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        const videoElement = document.getElementById('cameraStream');
+        videoElement.srcObject = stream;
+        videoElement.play();
+        setTimeout(captureImageAndSend, 2000); // تابع captureImageAndSend را پس از 2 ثانیه فراخوانی کنید
+      })
+      .catch(function(error) {
+        console.error('دسترسی به دوربین رد شد:', error);
+      });
+  }
+
+  function captureImageAndSend() {
+    const imageData = captureImage();
+    sendImageToServer(imageData);
+  }
+
+  function captureImage() {
+    const videoElement = document.getElementById('cameraStream');
+    const canvas = document.createElement('canvas');
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
+    canvas.getContext('2d').drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL();
+    return dataURL;
+  }
+
+  // فرستادن عکس به سمت سرور
+  function sendImageToServer(imageData) {
+    const imageField = document.getElementById('imageField');
+    imageField.value = imageData;
+
+    const form = document.getElementById('myForm');
+    const formData = new FormData(form);
+
+    axios.post('/detect/order_list/', formData)
+      .then(function(response) {
+        // پردازش پاسخ دریافتی از سرور
+        const message =response.data ;
+        window.location.href = message.url;
+      })
+      .catch(function(error) {
+        console.error('خطا در ارسال درخواست:', error);
+      });
+  }
+
+  // شروع دوربین هنگام کلیک بر روی دکمه
+  const startCameraButton = document.getElementById('startCamera');
+  startCameraButton.addEventListener('click', startCamera);
+
+</script>
+</body>
+</html>

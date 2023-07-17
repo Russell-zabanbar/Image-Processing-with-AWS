@@ -1,0 +1,29 @@
+
+    body {
+      background-color: #F5F5F5;
+    }
+
+    .table-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .table-wrapper table {
+      width: 100%;
+      background-color: #FFFFFF;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .table-wrapper th, td {
+      text-align: center;
+      padding: 12px;
+    }
+
+    .table-wrapper th {
+      background-color: #F2F2F2;
+    }
+
+    .table-wrapper tr:nth-child(even) {
+      background-color: #EFEFEF;
+    }

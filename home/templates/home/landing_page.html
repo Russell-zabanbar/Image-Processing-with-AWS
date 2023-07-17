@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نانوازی آنلاین - سفارش آسان و سریع نان و شیرینی</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #F25757; /* رنگ قرمز جذاب */
+      padding: 20px;
+      color: #fff;
+    }
+
+    header h1 {
+      font-size: 36px; /* افزایش اندازه فونت برای جذابیت */
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    #hero {
+      background-color: #FED766; /* رنگ زرد جذاب */
+    }
+
+    #hero .hero-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #333; /* رنگ متن به رنگ تیره تر تغییر یافته است */
+    }
+
+    #hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555; /* رنگ متن به رنگ تیره تر تغییر یافته است */
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #F25757; /* رنگ قرمز جذاب برای دکمه */
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .container h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333; /* رنگ متن به رنگ تیره تر تغییر یافته است */
+    }
+
+    .container p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555; /* رنگ متن به رنگ تیره تر تغییر یافته است */
+    }
+
+    .service {
+      margin-bottom: 40px;
+    }
+
+    .service h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333; /* رنگ متن به رنگ تیره تر تغییر یافته است */
+    }
+
+    footer {
+      background-color: #F25757; /* رنگ قرمز جذاب برای فوتر */
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>نانوازی آنلاین</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">درباره ما</a></li>
+        <li><a href="#services">خدمات</a></li>
+        <li><a href="#contact">تماس با ما</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <h2>نوبت دهی به نانوایی هاست</h2>
+      <p>از طریق سایت ما می‌توانید به راحتی نوبت خود را در نانوایی های محلی رزرو کنید و ساعت‌ها از صف‌ها و زمان انتظار صرفه‌جویی کنید.</p>
+     {% if request.user.is_authenticated %}
+        <a href="{% url 'detect:order_list' %}" class="cta-button">همین الان شروع کنید</a>
+     {% else %}
+        <a href="{% url 'auth:login' %}" class="cta-button">go</a>
+     {% endif %}
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h3>درباره ما</h3>
+      <p>ما یک پلتفرم نوبت دهی آنلاین برای نانوایی ها هستیم. ماموریت ما کاهش زمان انتظار مشتریان در صفوف نانوایی هاست و ایجاد تجربه بهتری برای آن‌هاست. با استفاده از سایت ما، می‌توانید نان و شیرینی مورد نظر خود را سفارش دهید و زمان تحویل دقیق را دریافت کنید.</p>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h3>خدمات</h3>
+      <div class="service">
+        <h4>نوبت دهی آسان</h4>
+        <p>ما روشی ساده و آسان برای نوبت دهی به نانوایی ها ارائه می‌دهیم. شما می‌توانید از طریق سایت ما برنامه‌ریزی کنید و به صورت دقیق بدانید که کی نان مورد نظر شما آماده می‌شود.</p>
+      </div>
+      <div class="service">
+        <h4>زمان صرفه‌جویی</h4>
+        <p>با استفاده از سرویس ما، شما می‌توانید ساعت‌ها زمان انتظار را در صفوف نانوایی‌ها صرفه‌جویی کنید. شما قبل از رفتن به نانوایی می‌توانید زمان تحویل دقیق را مشاهده کنید و در زمان مناسب به آنجا مراجعه کنید.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h3>تماس با ما</h3>
+      <p>برای ارتباط با تیم ما و سوالات خود، می‌توانید از طریق فرم زیر با ما در تماس باشید. ما به سرعت به پیام شما پاسخ خواهیم داد.</p>
+      <form action="#" method="post">
+        <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
+        <input type="email" name="email" placeholder="ایمیل" required>
+        <textarea name="message" placeholder="پیام شما" required></textarea>
+        <button type="submit">ارسال</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>کلیه حقوق این سایت متعلق به نانوازی آنلاین است.</p>
+    </div>
+  </footer>
+</body>
+</html>

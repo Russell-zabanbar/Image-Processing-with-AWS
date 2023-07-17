@@ -1,0 +1,4 @@
+from django.contrib import admin
+from orders.models import Order, single_order
+admin.site.register(Order)
+admin.site.register(single_order)

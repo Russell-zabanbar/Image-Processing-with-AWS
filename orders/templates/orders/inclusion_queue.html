@@ -1,0 +1,35 @@
+<!-- تمپلیت orders/inclusion_queue.html برای کاربران is_baker=True -->
+{% if is_baker %}
+    <div class="text-center mt-5" style="background-color: #FFFFFF;">
+        <button class="btn btn-primary btn-lg">درخواست نوبت با چهره</button>
+    </div>
+{% else %}
+    <div class="text-center mt-5" style="background-color: #FFFFFF;">
+<button onclick="window.location.href='{% url 'detect:generate_qrcode' %}'" class="btn btn-primary btn-lg">درخواست نوبت با Qrcode</button>
+    </div>
+{% endif %}
+
+<div class="row" style="background-color: #FFFFFF;">
+    <div class="col-md-12">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>شماره نوبت</th>
+                        <th> تعداد </th>
+                        <th>زمان انتظار </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in nums_and_ones %}
+                    <tr>
+                        <td> {{ order.order_code }} </td>
+                        <td> {{ order.bread_number }} </td>
+                        <td> {{ order.waiting_time }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

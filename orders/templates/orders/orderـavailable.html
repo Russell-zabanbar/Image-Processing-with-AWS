@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>نمایش سفارش</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .column {
+      flex: 1;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 8px;
+      margin: 10px;
+    }
+
+    .order {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .details {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<body>
+{% include 'messages.html' %}
+
+  <h1>نمایش سفارش</h1>
+  <div class="container">
+    <div class="column">
+      <div class="order">سفارش 1</div>
+      <div class="details">
+        <p>زمان انتظار: 10 دقیقه</p>
+        <p>تعداد نان: 2 عدد</p>
+        <p>کد سفارش: 123456</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
